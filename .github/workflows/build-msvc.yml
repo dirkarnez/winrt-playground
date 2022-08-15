@@ -20,12 +20,15 @@ jobs:
         shell: cmd
         run: cd /d ${{ github.workspace }} && curl https://github.com/Kitware/CMake/releases/download/v3.24.0/cmake-3.24.0-windows-x86_64.zip -L --output cmake-3.24.0-windows-x86_64.zip && dir && 7z.exe x cmake-3.24.0-windows-x86_64.zip
         
+      - name: check dir
+        shell: cmd
+        run: dir
+        
       - name: set PATH, cmake generate and build
         shell: cmd
         run: |
-            set PATH=^
-            ${{ github.workspace }};^  # for nuget.exe
-            ${{ github.workspace }}\cmake-3.24.0-windows-x86_64\bin;^
+            set PATH=${{ github.workspace }};^ # nuget
+            ${{ github.workspace }}\cmake-3.24.0-windows-x86_64\bin;
             cmake.exe -G "Visual Studio 16 2019" -A x64 -DCMAKE_BUILD_TYPE=Release -B./build &&^
             cd build && cmake --build . --target ALL_BUILD --config Debug -- /nologo /verbosity:minimal /maxcpucount
             
