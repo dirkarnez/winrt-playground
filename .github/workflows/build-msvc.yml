@@ -1,0 +1,40 @@
+name: cpp-cmake-msvc2019-prebuilt-release-actions-workflow
+on:
+  push:
+    # Sequence of patterns matched against refs/tags
+    tags:
+      - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
+
+jobs:
+  build:
+    name: Create Release
+    runs-on: windows-2019
+    env:
+      msvc2019TargetZip: winrt-playground-${{ github.ref_name }}-msvc2019.zip
+    steps:
+        
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Check cmake
+        run: cmake --version
+              
+      - name: set PATH, cmake generate and build
+        shell: cmd
+        run: |
+            set PATH=%~dp0;^  # for nuget.exe
+            cmake.exe -G "Visual Studio 16 2019" -A x64 -DCMAKE_BUILD_TYPE=Release -B./build &&^
+            cd build && cmake --build . --target ALL_BUILD --config Debug -- /nologo /verbosity:minimal /maxcpucount
+            
+      - name: Archive Release
+        uses: thedoctor0/zip-release@master
+        with:
+          type: 'zip'
+          directory: "${{github.workspace}}/build"
+          filename: "${{ env.msvc2019TargetZip }}"
+          
+      - name: Release prebuilt
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: "${{github.workspace}}/build/${{ env.msvc2019TargetZip }}"
+          allowUpdates: true
