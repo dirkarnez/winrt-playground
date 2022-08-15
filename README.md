@@ -1,6 +1,7 @@
 winrt-playground
 ================
-WIP - can compile but the exe crashes. Probably Visual Studio setup issue.
+~~WIP - can compile but the exe crashes. Probably Visual Studio setup issue.~~
+- Fixed: [NuGet Gallery | Microsoft.Windows.CppWinRT 2.0.220608.4](https://www.nuget.org/packages/Microsoft.Windows.CppWinRT/) should be installed for the compilation!
 
 ### Reference
 - [Programming to WinRT with Standard C++ using C++/WinRT - YouTube](https://www.youtube.com/watch?v=geSpXewSZMM)
