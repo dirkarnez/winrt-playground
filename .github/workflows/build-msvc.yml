@@ -28,7 +28,7 @@ jobs:
         shell: cmd
         run: |
             set PATH=${{ github.workspace }};^ # nuget
-            ${{ github.workspace }}\cmake-3.24.0-windows-x86_64\bin;
+            ${{ github.workspace }}\cmake-3.24.0-windows-x86_64\bin;^
             cmake.exe -G "Visual Studio 16 2019" -A x64 -DCMAKE_BUILD_TYPE=Release -B./build &&^
             cd build && cmake --build . --target ALL_BUILD --config Debug -- /nologo /verbosity:minimal /maxcpucount
             
