@@ -8,6 +8,7 @@ cd /d %~dp0
 @REM %DOWNLOAD_DIR%\cmake-3.22.2-windows-x86_64\bin;^
 
 set PATH=%PATH%;^
+%~dp0;^
 D:\Softwares\cmake-3.23.0-rc1-windows-x86_64\bin;
 
 cmake -G "Visual Studio 16 2019" -A x64 ^
