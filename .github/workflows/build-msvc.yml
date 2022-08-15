@@ -24,10 +24,10 @@ jobs:
         shell: cmd
         run: dir
         
-      - name: set PATH, cmake generate and build
+      - name: set PATH for cmake and especially nuget.exe, cmake generate and build
         shell: cmd
         run: |
-            set PATH=${{ github.workspace }};^ # nuget
+            set PATH=${{ github.workspace }};^
             ${{ github.workspace }}\cmake-3.24.0-windows-x86_64\bin;^
             cmake.exe -G "Visual Studio 16 2019" -A x64 -DCMAKE_BUILD_TYPE=Release -B./build &&^
             cd build && cmake --build . --target ALL_BUILD --config Debug -- /nologo /verbosity:minimal /maxcpucount
